@@ -1,5 +1,5 @@
 global:
-  slack_api_url: https://hooks.slack.com/services/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
+  slack_api_url: 
 
 route:
     receiver: Default
