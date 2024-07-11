@@ -1,0 +1,22 @@
+global:
+  slack_api_url: https://hooks.slack.com/services/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
+
+route:
+    receiver: Default
+    group_by: ['alertname']
+    group_wait: 15s
+    group_interval: 15s
+    repeat_interval: 1m
+
+    routes:
+      - receiver: Default
+        match:
+          team: web
+
+receivers:
+    - name: Default
+      slack_configs:
+        - channel: '#alerts'
+          send_resolved: true
+          text: "<!channel> \ntitle: {{ .CommonAnnotations.title }}\ndescription: {{ .CommonAnnotations.description }}"
+

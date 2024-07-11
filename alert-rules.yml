@@ -1,0 +1,12 @@
+groups:
+  - name: NodeJS Express
+    rules:
+      - alert: HighRequestCount
+        expr: rate(http_requests_total{route="/"}[1m]) >= 1
+        for: 10s
+        labels:
+          team: web
+        annotations:
+          title: Many requests
+          description: High traffic on API
+

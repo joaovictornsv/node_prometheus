@@ -1,0 +1,35 @@
+global:
+  scrape_interval: 10s
+  scrape_timeout: 10s
+  scrape_protocols:
+  - OpenMetricsText1.0.0
+  - OpenMetricsText0.0.1
+  - PrometheusText0.0.4
+  evaluation_interval: 1m
+
+rule_files:
+  - alert-rulers.rules
+
+scrape_configs:
+  - job_name: node_app
+    static_configs:
+      - targets:
+        - localhost:8080
+
+  - job_name: prometheus
+    static_configs:
+      - targets:
+        - localhost:9090
+
+          #  - job_name: docker
+          #static_configs:
+          #- targets: 
+          #- localhost:9323
+          #
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+          - "localhost:9093"
